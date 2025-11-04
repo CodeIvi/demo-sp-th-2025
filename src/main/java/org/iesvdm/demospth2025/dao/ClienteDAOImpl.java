@@ -23,12 +23,10 @@ import java.util.Optional;
 
 public class ClienteDAOImpl implements ClienteDAO {
 
-
-    private final JdbcClient jdbcClient;
+    @Autowired
     private final JdbcTemplate jdbcTemplate;
 
-    public ClienteDAOImpl(JdbcClient jdbcClient, JdbcTemplate jdbcTemplate) {
-        this.jdbcClient = jdbcClient;
+    public ClienteDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
