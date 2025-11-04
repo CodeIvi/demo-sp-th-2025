@@ -33,7 +33,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public void create(Cliente cliente) {
         String sql = """
-                insert into cliente (nombre, apellido1, apellido2, ciudad, categoría)
+                insert into cliente (nombre, apellido1, apellido2, ciudad, categoria)
                 values (      ?,      ?,     ?,     ?,      ?);
                 """;
                 String[] ids = {"id"};
@@ -68,7 +68,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                                         rs.getString("apellido1"),
                                         rs.getString("apellido2"),
                                         rs.getString("ciudad"),
-                                        rs.getInt("categoría")
+                                        rs.getInt("categoria")
                                     )
                 );
 
@@ -82,7 +82,6 @@ public class ClienteDAOImpl implements ClienteDAO {
     public Optional<Cliente> find(int id) {
         try {
             Cliente cliente = jdbcTemplate.queryForObject("""
-                        
                         SELECT *
                         FROM cliente 
                         WHERE id = ?
@@ -93,7 +92,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                                 .apellido1(rs.getString("apellido1"))
                                 .apellido2(rs.getString("apellido2"))
                                 .ciudad(rs.getString("ciudad"))
-                                .categoria(rs.getInt("categoría"))
+                                .categoria(rs.getInt("categoria"))
                                 .build()
                         ,
                         id
@@ -110,7 +109,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     public void update(Cliente cliente) {
        var rowsUpdate = jdbcTemplate.update("""
                 UPDATE cliente
-                SET nombre = ?,apellido1 = ?,apellido2 = ?, ciudad = ?, categoría = ?
+                SET nombre = ?,apellido1 = ?,apellido2 = ?, ciudad = ?, categoria = ?
                 WHERE id = ?
                 """, cliente.getNombre(),
                 cliente.getApellido1(),
@@ -132,7 +131,7 @@ public class ClienteDAOImpl implements ClienteDAO {
         WHERE id = ?
         """
         ,id);
-        log.debug("Flias actualizadas {}", rowsUpdate);
+        log.debug("Filaas actualizadas {}", rowsUpdate);
 
         }
 

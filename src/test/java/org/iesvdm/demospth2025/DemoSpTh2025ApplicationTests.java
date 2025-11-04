@@ -2,7 +2,10 @@ package org.iesvdm.demospth2025;
 
 import org.iesvdm.demospth2025.dao.ClienteDAO;
 import org.iesvdm.demospth2025.dao.ClienteDAOImpl;
+import org.iesvdm.demospth2025.dao.ComercialDAO;
+import org.iesvdm.demospth2025.dao.ComercialDAOImpl;
 import org.iesvdm.demospth2025.modelo.Cliente;
+import org.iesvdm.demospth2025.modelo.Comercial;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,10 @@ class DemoSpTh2025ApplicationTests {
 
     @Autowired
     ClienteDAO clienteDAO;
+    @Autowired
+    ComercialDAO comercialDAO;
+    @Autowired
+    private ComercialDAOImpl comercialDAOImpl;
 
     @Test
     void contextLoads() {
@@ -92,6 +99,69 @@ class DemoSpTh2025ApplicationTests {
         Optional<Cliente> optionalClienteReal = clienteDAO.find(cliente.getId());
 
             Assertions.assertTrue(optionalClienteReal.isEmpty());
+
+    }
+    @Test
+    void testFindComercial(){
+        Optional<Comercial> optionalComercial= comercialDAO.find(3);
+
+        if(optionalComercial.isPresent()){
+            System.out.println(optionalComercial.get());
+        }else{
+            System.out.println("Vacío!!!");
+        }
+    }
+
+    @Test
+    void testCreateComercial(){
+        Comercial comercial = Comercial.builder().nombre("Iván").apellido1("Alarcón").apellido2("Herrera").comision(0.2f)
+                .build();
+
+        System.out.println("Antes de crear id :" +comercial.getId());
+
+        comercialDAO.create(comercial);
+
+        System.out.println("Después de crear id: "+comercial.getId());
+    }
+
+    @Test
+    void testUpdateComercial(){
+
+        Comercial comercial = Comercial.builder().nombre("Iván")
+                .apellido1("Alarcón")
+                .apellido2("Herrera")
+                .comision(0.2f)
+                .build();
+        comercialDAO.create(comercial);
+
+        comercial.setNombre("Ivanito");
+
+        comercialDAO.update(comercial);
+
+        Optional<Comercial> optionalComercialReal = comercialDAO.find(comercial.getId());
+
+        if(optionalComercialReal.isPresent()){
+            Assertions.assertEquals("Ivanito",optionalComercialReal.get().getNombre());
+        }else{
+            Assertions.fail();
+        }
+    }
+    @Test
+    void testDeleteComercial(){
+
+        Comercial comercial = Comercial.builder().nombre("Iván")
+                .apellido1("Alarcón")
+                .apellido2("Herrera")
+                .comision(0.2f)
+                .build();
+
+        comercialDAO.create(comercial);
+
+        comercialDAO.delete(comercial.getId());
+
+        Optional<Comercial> optionalComercialReal = comercialDAO.find(comercial.getId());
+
+        Assertions.assertTrue(optionalComercialReal.isEmpty());
 
     }
 }
