@@ -23,8 +23,6 @@ class DemoSpTh2025ApplicationTests {
     ClienteDAO clienteDAO;
     @Autowired
     ComercialDAO comercialDAO;
-    @Autowired
-    private ComercialDAOImpl comercialDAOImpl;
 
     @Test
     void contextLoads() {
