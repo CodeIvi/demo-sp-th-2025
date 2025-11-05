@@ -19,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 //Un Repository es un componente y a su vez un estereotipo de Spring
 //que forma parte de la 'capa de persistencia'.
-@Repository
+@Repository("sqlImpl")
 
 public class ClienteDAOImpl implements ClienteDAO {
 
