@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<h1> Formulario crear cliente</h1>
+
+<form th:action="@{/demoth/crear}" th:object="${cliente}" method="post">
+
+    <label>Nombre</label>
+    <input th:field="*{nombre}">
+
+    <br/>
+
+    <label>Apellido 1</label>
+    <input th:field="*{apellido1}">
+    <br/>
+
+    <label>Apellido 1</label>
+    <input th:field="*{apellido2}">
+    <br/>
+
+    <button type="submit">Enviar</button>
+
+
+
+
+
+</form>
+
+
+</body>
+</html>
